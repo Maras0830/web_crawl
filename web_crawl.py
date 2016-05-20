@@ -6,27 +6,27 @@ import sys
 #說明文件
 def usage():
 	print (''' \033[92m	crawl from to get something. \n
-	usage : python3 web_crawl.py [-u] [User]
+	usage : python3 web_crawl.py [-g] [GameId]
 
 	-h : help
-	-u : User
+	-g : Game Id
 
 	By Maras. \033[0m''')
 	sys.exit()
 
 #取得參數輸入
 def get_parameters():
-	global appId
-	appId = None
+	global gameId
+	gameId = None
 	optp = OptionParser(add_help_option=False,epilog="web_crawl")
-	optp.add_option("-a","--AppId",dest="appId",help="-u Steam App Game ID")
+	optp.add_option("-g","--gameId",dest="gameId",help="-g Steam App Game ID")
 	optp.add_option("-h","--help",dest="help",action='store_true',help="help you")
 	opts, args = optp.parse_args()
 	if opts.help:
 		usage()
 
-	if opts.appId is not None:
-		appId = opts.appId
+	if opts.gameId is not None:
+		gameId = opts.gameId
 
 #開始
 if __name__ == '__main__':
@@ -35,9 +35,9 @@ if __name__ == '__main__':
 	get_parameters()
 	url = None
 	if appId is not None:
-		url = "http://store.steampowered.com/app/" + appId
+		url = "http://store.steampowered.com/app/" + gameId
 	else: 
-		print ('Please input -a or -h')
+		print ('Please input -g or -h')
 
 	if url is not None:
 		#設置假的瀏覽器資訊
